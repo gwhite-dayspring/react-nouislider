@@ -43,6 +43,15 @@ class Nouislider extends React.Component {
 Nouislider.propTypes = {
   // http://refreshless.com/nouislider/slider-options/#section-animate
   animate: React.PropTypes.bool,
+  // http://refreshless.com/nouislider/behaviour-option/
+  behaviour: function(props, propName) {
+    var values = props[propName] ? props[propName].split('-') : [];
+    values.forEach(function(behaviour) {
+      if (['drag', 'tap', 'fixed', 'hover', 'snap', 'none'].indexOf(behaviour) === -1) {
+        return new Error('Behaviour property must be one "-" separated string of these options: "drag", "tap", "fixed", "hover", "snap" or "none"');
+      }
+    });
+  },
   // http://refreshless.com/nouislider/slider-options/#section-Connect
   connect: React.PropTypes.oneOfType([
     React.PropTypes.oneOf(['lower', 'upper']),
